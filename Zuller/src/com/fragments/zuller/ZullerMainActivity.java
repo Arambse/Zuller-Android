@@ -1,7 +1,10 @@
-package com.logics.zuller;
+package com.fragments.zuller;
 
 import com.iparsables.zuller.Attraction;
 import com.iparsables.zuller.IParsable;
+import com.logics.zuller.R;
+import com.logics.zuller.R.layout;
+import com.logics.zuller.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -20,9 +23,12 @@ public class ZullerMainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_zuller_main, menu);
+		
+		/*
 		FactoryMaker factoryMaker = new FactoryMaker();
 		ParsingFactory factory = factoryMaker.getFactory("AttractionFactory");
 		IParsable t = factory.Parse(new Object());
+		 */
 		return true;
 	}
 
