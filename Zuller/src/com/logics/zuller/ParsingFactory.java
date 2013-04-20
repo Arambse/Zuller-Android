@@ -6,5 +6,5 @@ import com.iparsables.zuller.IParsable;
 
 public interface ParsingFactory {
 
-	public IParsable Parse(Object object);
+	public IParsable getParsedObject(Object object, String objectType);
 }

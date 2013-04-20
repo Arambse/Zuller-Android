@@ -4,6 +4,7 @@ import android.R.string;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.iparsables.zuller.Attraction;
 import com.iparsables.zuller.IParsable;
@@ -19,15 +20,19 @@ public class AttractionFactory implements ParsingFactory {
 
 	
 	@Override
-	public IParsable Parse(Object object) {
-		
-		//TODO check if Object is really a good JSON object
-		
-		JsonObject jsonObject = (JsonObject)object;
-		return createAttraction(jsonObject);
+	public IParsable getParsedObject(Object object, String objectType) {
+		if (objectType == "JSON")
+			return ParseJSON((JsonElement)object);
+		return null;
 	}
 	
-	public Attraction createAttraction(JsonObject jsonObject) {
+	
+	public IParsable ParseJSON(JsonElement jsonElement) {	
+		//TODO check if Object is really a good JSON object
+		return createAttraction(jsonElement.getAsJsonObject());
+	}
+	
+	private Attraction createAttraction(JsonObject jsonObject) {
 		
 		String type = jsonObject.get("type").toString();
 		int attractionAsInt = gettAttractionTypeInInt(type);
@@ -57,7 +62,6 @@ public class AttractionFactory implements ParsingFactory {
          
 		return attraction;
 	}
-
 	private int gettAttractionTypeInInt(String type) {
 		if (type == "Bar")
 			return BAR;
