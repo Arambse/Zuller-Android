@@ -10,5 +10,10 @@ public class Bar extends Place {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Bar(JsonObject jsonObj){
+		super();
+		Fill(jsonObj);
+	}
 
 }

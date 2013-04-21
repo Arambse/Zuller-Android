@@ -8,7 +8,11 @@ class AsyncTaskNetworkParams {
 
     String url;
 
-    AsyncTaskNetworkParams(String requestUrl){
+    public String getUrl() {
+		return url;
+	}
+
+	AsyncTaskNetworkParams(String requestUrl){
     	this.url = requestUrl;
     }
     

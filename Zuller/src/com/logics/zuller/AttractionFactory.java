@@ -2,6 +2,11 @@ package com.logics.zuller;
 
 import android.R.string;
 
+import com.deserializers.zuller.BarDeserializer;
+import com.deserializers.zuller.ClubDeserializer;
+import com.deserializers.zuller.LineDeserializer;
+import com.deserializers.zuller.PartyDeserializer;
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -18,27 +23,26 @@ public class AttractionFactory implements ParsingFactory {
 	private static final int LINE = 2;
 	private static final int EVENT = 3;
 
-	
+	private Gson gsonParser;
+
 	@Override
 	public IParsable getParsedObject(Object object, String objectType) {
 		if (objectType == "JSON")
-			return ParseJSON((JsonElement)object);
+			return ParseJSON((JsonElement) object);
 		return null;
 	}
-	
-	
-	public IParsable ParseJSON(JsonElement jsonElement) {	
-		//TODO check if Object is really a good JSON object
+
+	public IParsable ParseJSON(JsonElement jsonElement) {
+		// TODO check if Object is really a good JSON object
 		return createAttraction(jsonElement.getAsJsonObject());
 	}
-	
+
 	private Attraction createAttraction(JsonObject jsonObject) {
-		
+
 		String type = jsonObject.get("type").toString();
 		int attractionAsInt = gettAttractionTypeInInt(type);
-		
+
 		Attraction attraction;
-		Gson gsonParser = new Gson();
 
 		switch (attractionAsInt) {
 		case BAR:
@@ -59,9 +63,10 @@ public class AttractionFactory implements ParsingFactory {
 			attraction = null;
 			break;
 		}
-         
+
 		return attraction;
 	}
+
 	private int gettAttractionTypeInInt(String type) {
 		if (type == "Bar")
 			return BAR;
@@ -75,5 +80,17 @@ public class AttractionFactory implements ParsingFactory {
 
 	}
 
+	public AttractionFactory() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder
+				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
+		gsonBuilder
+		        .registerTypeAdapter(Bar.class, new BarDeserializer())
+				.registerTypeAdapter(Club.class, new ClubDeserializer())
+				.registerTypeAdapter(Line.class, new LineDeserializer())
+				.registerTypeAdapter(Party.class, new PartyDeserializer());
+
+		gsonParser = gsonBuilder.create();
+	}
 
 }

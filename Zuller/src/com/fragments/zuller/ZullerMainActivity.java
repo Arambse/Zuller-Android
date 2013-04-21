@@ -1,13 +1,9 @@
 package com.fragments.zuller;
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,30 +12,34 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragment;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
-import com.iparsables.zuller.Attraction;
 import com.iparsables.zuller.IParsable;
 import com.logics.zuller.FactoryMaker;
 import com.logics.zuller.ParsingFactory;
 import com.logics.zuller.R;
-import com.logics.zuller.R.layout;
-import com.logics.zuller.R.menu;
 import com.variables.zuller.ZullerConstants;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Menu;
 
-public class ZullerMainActivity extends Activity {
 
+public class ZullerMainActivity extends SherlockActivity {
+
+	private SherlockFragment mainFragment;
+	private SherlockFragment expandedFragment;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_zuller_main);
 
 		try {
@@ -50,19 +50,19 @@ public class ZullerMainActivity extends Activity {
 			String jSONResposnseString = EntityUtils.toString(response);
 			Log.d("JSONDebug", jSONResposnseString);
 
-			 Gson gson = new Gson();
-			    JsonParser parser = new JsonParser();
-			    JsonArray Jarray = parser.parse(jSONResposnseString).getAsJsonArray();
+			Gson gson = new Gson();
+			JsonParser parser = new JsonParser();
+			JsonArray Jarray = parser.parse(jSONResposnseString)
+					.getAsJsonArray();
 
-			    FactoryMaker factoryMaker = new FactoryMaker();
-				ParsingFactory factory = factoryMaker.getFactory("AttractionFactory");
-			    
-			    for(JsonElement obj : Jarray )
-			    {
-			       Log.d("JSONDebug", obj.toString());
-			       IParsable t = factory.getParsedObject(obj, "JSON");
-			    }
-				    
+			FactoryMaker factoryMaker = new FactoryMaker();
+			ParsingFactory factory = factoryMaker
+					.getFactory("AttractionFactory");
+
+			for (JsonElement obj : Jarray) {
+				Log.d("JSONDebug", obj.toString());
+				IParsable t = factory.getParsedObject(obj, "JSON");
+			}
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -76,16 +76,5 @@ public class ZullerMainActivity extends Activity {
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_zuller_main, menu);
-
-		/*
-		
-		 */
-
-		return true;
-	}
 
 }

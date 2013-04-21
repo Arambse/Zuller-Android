@@ -8,7 +8,7 @@ import android.R.integer;
 import android.os.AsyncTask;
 
 public class JSONPostAsyncTask extends
-		AsyncTask<AsyncTaskPostNetworkParams, integer, Long> {
+		AsyncTask<AsyncTaskPostNetworkParams, integer, ZullerHttpResponse> {
 	private NetworkManager networkManager;
 
 	public NetworkManager getNetworkManager() {
@@ -20,9 +20,23 @@ public class JSONPostAsyncTask extends
 	}
 
 	@Override
-	protected Long doInBackground(AsyncTaskPostNetworkParams... params) {
+	protected ZullerHttpResponse doInBackground(
+			AsyncTaskPostNetworkParams... params) {
 		// TODO Auto-generated method stub
-		return null;
+		if (networkManager == null)
+			networkManager = new NetworkManager();
+		String urlOfRequest = params[0].getUrl();
+		HashMap<String, String> postDataOfRequest = params[0]
+				.getPostDataHashMap();
+		return networkManager.RequestPost(urlOfRequest, postDataOfRequest);
+
 	}
+    protected void onProgressUpdate(Integer... progress) {
+     
+    }
+
+    protected void onPostExecute(Long result) {
+       
+    }
 
 }

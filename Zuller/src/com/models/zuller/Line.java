@@ -10,5 +10,10 @@ public class Line extends Event{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public Line(JsonObject jsonObj){
+		super();
+		Fill(jsonObj);
+	}
+
 
 }

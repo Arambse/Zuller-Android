@@ -10,5 +10,10 @@ public class Party extends Event {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public Party(JsonObject jsonObj){
+		super();
+		Fill(jsonObj);
+	}
+
 
 }

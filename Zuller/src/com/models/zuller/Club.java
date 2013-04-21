@@ -10,5 +10,9 @@ public class Club extends Place {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public Club(JsonObject jsonObj){
+		super();
+		Fill(jsonObj);
+	}
 
 }
