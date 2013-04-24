@@ -1,11 +1,13 @@
 package com.networking.zuller;
 
 import android.R.integer;
+import android.content.Context;
 import android.os.AsyncTask;
 
 public class JSONGetAsyncTask extends
 		AsyncTask<AsyncTaskNetworkParams, Integer, ZullerHttpResponse> {
 	private NetworkManager networkManager;
+	private Context context;
 
 	public NetworkManager getNetworkManager() {
 		return networkManager;

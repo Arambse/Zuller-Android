@@ -5,12 +5,15 @@ import java.util.HashMap;
 import com.networking.zuller.AsyncTaskNetworkParams.AsyncTaskPostNetworkParams;
 
 import android.R.integer;
+import android.content.Context;
 import android.os.AsyncTask;
 
 public class JSONPostAsyncTask extends
 		AsyncTask<AsyncTaskPostNetworkParams, integer, ZullerHttpResponse> {
 	private NetworkManager networkManager;
-
+    private Context cosntext;
+	
+	
 	public NetworkManager getNetworkManager() {
 		return networkManager;
 	}
