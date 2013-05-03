@@ -11,7 +11,7 @@ import android.os.AsyncTask;
 public class JSONPostAsyncTask extends
 		AsyncTask<AsyncTaskPostNetworkParams, integer, ZullerHttpResponse> {
 	private NetworkManager networkManager;
-    private Context cosntext;
+    private Context context;
 	
 	
 	public NetworkManager getNetworkManager() {

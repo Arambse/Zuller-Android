@@ -1,55 +1,58 @@
 package com.fragments.zuller;
 
+import java.util.ArrayList;
+
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
+import com.google.gson.JsonElement;
+import com.iparsables.zuller.IParsable;
+import com.logics.zuller.FactoryMaker;
+import com.logics.zuller.JSONResponseParser;
+import com.logics.zuller.ParsingFactory;
 import com.logics.zuller.R;
+import com.networking.zuller.NetworkManager;
+import com.networking.zuller.ZullerHttpResponse;
+import com.variables.zuller.ZullerConstants;
 
 public class ZullerMainActivity extends SherlockActivity {
 
+	
 	private SherlockFragment mainFragment;
 	private SherlockFragment expandedFragment;
+	private NetworkManager activityNetworkManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_zuller_main);
-		//
-		// try {
-		// DefaultHttpClient httpClient = new DefaultHttpClient();
-		// HttpGet httpGet = new HttpGet(ZullerConstants.ZULLER_GETSEARCH_HTTP);
-		// HttpResponse httpResponse = httpClient.execute(httpGet);
-		// HttpEntity response = httpResponse.getEntity();
-		// String jSONResposnseString = EntityUtils.toString(response);
-		// Log.d("JSONDebug", jSONResposnseString);
-		//
-		// Gson gson = new Gson();
-		// JsonParser parser = new JsonParser();
-		// JsonArray Jarray = parser.parse(jSONResposnseString)
-		// .getAsJsonArray();
-		//
-		// FactoryMaker factoryMaker = new FactoryMaker();
-		// ParsingFactory factory = factoryMaker
-		// .getFactory("AttractionFactory");
-		//
-		// for (JsonElement obj : Jarray) {
-		// Log.d("JSONDebug", obj.toString());
-		// IParsable t = factory.getParsedObject(obj, "JSON");
-		// }
-		//
-		// } catch (UnsupportedEncodingException e) {
-		// e.printStackTrace();
-		// } catch (ClientProtocolException e) {
-		// e.printStackTrace();
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// } catch (Exception e) {
-		// Log.d("JSONDebug", e.getMessage());
-		// }
+		initializeMembers();
+
+		ZullerHttpResponse httpResponse = activityNetworkManager.RequestPost(ZullerConstants.ZULLER_POST_SEARCH_HTTP, null);
+		String responseString;
+		if (httpResponse.succeeded)
+			responseString = httpResponse.getResponse();
+		else
+			responseString = "";
+		JSONResponseParser responseParser = new JSONResponseParser();
+		boolean couldParse = responseParser.createEntriesSet(responseString);
+		if (couldParse)
+		{
+			JsonElement attractionEntry = responseParser.getEntrySetValue(ZullerConstants.ATTRACTION_ENTRY_NAME);
+			if (!attractionEntry.isJsonArray())
+				return;
+			ParsingFactory attractionParserFactory = FactoryMaker.getFactory("AttractionFactory");
+			ArrayList<IParsable> parsedObjectsList = attractionParserFactory.getParsedObjectsListFromJsonArray(attractionEntry.getAsJsonArray());
+		}
+		
+		
 
 	}
 
@@ -57,7 +60,11 @@ public class ZullerMainActivity extends SherlockActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.activity_zuller_main, menu);
-		return true;
+		return (true);
+	}
+
+	private void initializeMembers() {
+		activityNetworkManager = new NetworkManager();
 	}
 
 }

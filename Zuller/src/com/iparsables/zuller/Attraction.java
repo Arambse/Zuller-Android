@@ -78,12 +78,12 @@ public abstract class Attraction implements IParsable,IDisplayable {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-////	public String[] getMusic(){
-////		return music;
-////	}
-////	public void setMusic(String[] music){
-////		this.music = music;
-////	}
-//	
+	public String[] getMusic(){
+		return music;
+	}
+	public void setMusic(String[] music){
+		this.music = music;
+	}
+	
 		
 	}

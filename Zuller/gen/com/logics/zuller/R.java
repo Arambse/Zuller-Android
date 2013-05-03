@@ -960,14 +960,16 @@ containing a value of this type.
         public static final int abs__title=0x7f04001b;
         public static final int abs__titleDivider=0x7f04001c;
         public static final int abs__up=0x7f04000b;
-        public static final int action_refresh=0x7f040033;
-        public static final int action_settings=0x7f040034;
+        public static final int addServer=0x7f040035;
+        public static final int button=0x7f040033;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040027;
         public static final int homeAsUp=0x7f040006;
         public static final int listMode=0x7f040002;
-        public static final int menu_settings=0x7f040035;
+        public static final int menu_settings=0x7f040034;
         public static final int normal=0x7f040001;
+        public static final int refreshServers=0x7f040036;
+        public static final int settings=0x7f040037;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
@@ -1003,9 +1005,12 @@ containing a value of this type.
         public static final int abs__search_view=0x7f030015;
         public static final int abs__simple_dropdown_hint=0x7f030016;
         public static final int activity_zuller_main=0x7f030017;
-        public static final int main_sherlock_action_bar=0x7f030018;
-        public static final int sherlock_spinner_dropdown_item=0x7f030019;
-        public static final int sherlock_spinner_item=0x7f03001a;
+        public static final int introduction=0x7f030018;
+        public static final int parsable_detailed_view_fragment=0x7f030019;
+        public static final int parsable_list_fragment=0x7f03001a;
+        public static final int question_fragment=0x7f03001b;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001c;
+        public static final int sherlock_spinner_item=0x7f03001d;
     }
     public static final class menu {
         public static final int activity_zuller_main=0x7f0b0000;
