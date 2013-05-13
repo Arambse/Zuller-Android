@@ -14,20 +14,23 @@ public class JSONPostAsyncTask extends
     private Context context;
 	
 	
-	public NetworkManager getNetworkManager() {
-		return networkManager;
-	}
-
-	public void setNetworkManager(NetworkManager networkManager) {
-		this.networkManager = networkManager;
-	}
+//	public NetworkManager getNetworkManager() {
+//		return networkManager;
+//	}
+//
+//	public void setNetworkManager(NetworkManager networkManager) {
+//		this.networkManager = networkManager;
+//	}
+    
+    public JSONPostAsyncTask(NetworkManager networkManagerArg)
+    {
+    	networkManager = networkManagerArg;
+    }
 
 	@Override
 	protected ZullerHttpResponse doInBackground(
 			AsyncTaskPostNetworkParams... params) {
 		// TODO Auto-generated method stub
-		if (networkManager == null)
-			networkManager = new NetworkManager();
 		String urlOfRequest = params[0].getUrl();
 		HashMap<String, String> postDataOfRequest = params[0]
 				.getPostDataHashMap();
@@ -38,7 +41,7 @@ public class JSONPostAsyncTask extends
      
     }
 
-    protected void onPostExecute(Long result) {
+    protected void onPostExecute(ZullerHttpResponse result) {
        
     }
 

@@ -123,13 +123,13 @@ public class AttractionFactory implements ParsingFactory {
 	}
 
 	private int getAttractionTypeInInt(String type) {
-		if (type.equals("bar"))
+		if (type.equals("Bar"))
 			return BAR;
-		else if (type.equals("club"))
+		else if (type.equals("Club"))
 			return CLUB;
-		else if (type.equals("line"))
+		else if (type.equals("Line"))
 			return LINE;
-		else if (type.equals("event"))
+		else if (type.equals("Event"))
 			return EVENT;
 		return -1;
 
