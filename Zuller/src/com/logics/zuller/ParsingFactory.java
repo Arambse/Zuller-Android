@@ -8,10 +8,11 @@ import android.net.ParseException;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.iparsables.zuller.Attraction;
 import com.iparsables.zuller.IParsable;
 
 public interface ParsingFactory {
 
-	public ArrayList<IParsable> getParsedObjectsListFromJsonArray(JsonArray jsonArray);
-	public IParsable getParsedObject(Entry<String, JsonElement> jsonEntry);
+	public ArrayList<Attraction> getParsedObjectsListFromJsonArray(JsonArray jsonArray);
+	public Attraction getParsedObject(Entry<String, JsonElement> jsonEntry);
 }

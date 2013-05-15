@@ -56,15 +56,15 @@ public class AttractionFactory implements ParsingFactory {
 
 	
 	@Override
-	public IParsable getParsedObject(Entry<String, JsonElement> attractionEntry) {
+	public Attraction getParsedObject(Entry<String, JsonElement> attractionEntry) {
 		return ParseJSON((Entry<String, JsonElement>) attractionEntry);
 	}
 
 	@Override
-	public ArrayList<IParsable> getParsedObjectsListFromJsonArray(
+	public ArrayList<Attraction> getParsedObjectsListFromJsonArray(
 			JsonArray jsonArray) {
 
-		ArrayList<IParsable> parsablesList = new ArrayList<IParsable>();
+		ArrayList<Attraction> parsablesList = new ArrayList<Attraction>();
 		for (JsonElement jsonElement : jsonArray)
 		{
 			Set<Entry<String, JsonElement>> jsonEntries = jsonElement.getAsJsonObject().entrySet();
@@ -84,9 +84,9 @@ public class AttractionFactory implements ParsingFactory {
 	// End of Abstract Implementaion
 	// ----------------------------------------*****-------------------------------------------------//
 
-	public IParsable ParseJSON(Entry<String, JsonElement> attractionEntry) {
+	public Attraction ParseJSON(Entry<String, JsonElement> attractionEntry) {
 		// TODO check if Object is really a good JSON object
-		IParsable iParsable = createAttraction(attractionEntry);
+		Attraction iParsable = createAttraction(attractionEntry);
 		return iParsable;
 	}
 

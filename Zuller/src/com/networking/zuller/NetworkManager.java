@@ -19,6 +19,19 @@ import org.apache.http.util.EntityUtils;
 
 public class NetworkManager {
 
+	private static NetworkManager instance = null;
+
+	protected NetworkManager() {
+		// Exists only to defeat instantiation.
+	}
+
+	public static NetworkManager getInstance() {
+		if (instance == null) {
+			instance = new NetworkManager();
+		}
+		return instance;
+	}
+
 	public ZullerHttpResponse RequestGet(String url) {
 
 		DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -77,12 +90,11 @@ public class NetworkManager {
 
 	private ArrayList<NameValuePair> createPostArray(
 			HashMap<String, String> hashMap) {
-		
+
 		if (hashMap == null)
 			return new ArrayList<NameValuePair>();
-		
-		
-		ArrayList<NameValuePair> postPairs = new ArrayList<NameValuePair>();	
+
+		ArrayList<NameValuePair> postPairs = new ArrayList<NameValuePair>();
 		for (Map.Entry<String, String> postDataEntry : hashMap.entrySet()) {
 			postPairs.add(new BasicNameValuePair(postDataEntry.getKey(),
 					postDataEntry.getValue()));
