@@ -4,5 +4,6 @@
     <string name="app_name">Zuller</string>
     <string name="menu_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="app_facebook_id">462135340530036</string>
 
 </resources>
